@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Channel Board &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flashing Boards" href="flashing_boards.html" />
+    <link rel="prev" title="Motherboard" href="motherboard.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Channel Board</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#outline">Outline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-structure">File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#board-overview">Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#theory-of-operation">Theory of Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-connections">Power Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock-distribution">Clock Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-guide">Programming Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_software.html">Running Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Channel Board</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/channelboard.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="channel-board">
+<span id="ref-channelboard"></span><h1>Channel Board<a class="headerlink" href="#channel-board" title="Permalink to this heading"></a></h1>
+<section id="outline">
+<h2>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h2>
+<p>This section contains information on the channel boards including their operation, features, configuration options, and connections. This section contains the KiCAD PCB files as well as Gerber fabrication outputs for manufacturing these boards. The Bill-of-Materials spreadsheet is also included.</p>
+</section>
+<section id="file-structure">
+<h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- pcb/
+  - channel-board/
+    - BOM.xlsx             &lt;- Bill of Materials
+    - BoatCentralboard.pro &lt;- main KiCad 5 project file
+    - BoatCentralBoard.*   &lt;- misc KiCad 5 project files
+    - fp-lib-table         &lt;- KiCad project footprint library location table
+    - sym-lib-table        &lt;- KiCad project symbol library location table
+    - Fabrication Files/   &lt;- GERBER files for fabrication
+</pre></div>
+</div>
+</section>
+<section id="board-overview">
+<h2>Board Overview<a class="headerlink" href="#board-overview" title="Permalink to this heading"></a></h2>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/channelboard.jpg"><img alt="Picture of the channelboard calling out features" src="_images/channelboard.jpg" style="width: 800px;" /></a>
+</figure>
+<p>Each channel board is capable of driving both the transmit (TX) and receive (RX) operations for a single piezoelectric transducer in the array. An ATSAM4S microcontroller is used for PWM generation, ADC sampling, DAC output, I2C communications, and other functions. The board contains both a TX and RX analog front-end. The TX front end generates a high-voltage sinusoidal pulse to drive the transducers. This signal is output to the central motherboard with a screw terminal connector. The RX front end accepts an incoming signal from the motherboard with a BNC connector, then filters and amplifies the signal before it is sampled.  The board requires five voltage rails, typically supplied by benchtop power supplies over banana cables: ±40V, ±15V and ground. It also contains two headers at the top and bottom for the I2C and SYNC signals, so multiple channel boards can be linked on the same bus by ribbon cables. Other connectors include a JTAG programming header for the microcontroller and a screw terminal for the TX/RX switch logic signal. Due to the modular design, the entire array can be easily scaled up from the 3x3 array used in our work.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/channelboards.jpg"><img alt="Picture of the channelboard layout for the 3x3 array" src="_images/channelboards.jpg" style="width: 800px;" /></a>
+</figure>
+<p>The nine-channel layout with the central board is shown in the above image. Note that not all connections between boards are shown.</p>
+</section>
+<section id="theory-of-operation">
+<h2>Theory of Operation<a class="headerlink" href="#theory-of-operation" title="Permalink to this heading"></a></h2>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/blockdiagram.png"><img alt="Block Diagram of the Channel Board" src="_images/blockdiagram.png" style="width: 800px;" /></a>
+</figure>
+<p>The channel circuitry is made of two analog front ends: a TX AFE that drives the piezoelectric transducer, and an RX AFE that amplifies and filters signals reflected back to the transducers. The image above shows a block diagram of both front-ends.</p>
+<p>The TX AFE creates a high-voltage sinusoidal burst. The TX AFE can generate bursts with adjustable initial delays, burst amplitudes, and burst durations. When initiated by the rising edge of a digital signal called SYNC, the timer peripheral in each channel’s microcontroller waits for an initial delay, then it generates a 92kHz pulse-width modulated (PWM)  signal, typically with a 100us duration. The PWM burst drives the select line of an analog multiplexer, which causes the output of the multiplexer to switch between ground and a digital-to-analog converter (DAC) voltage.  The DAC voltage is also generated by the microcontroller. The multiplexer output is driven into a set of amplifiers and filters, and because the amplifiers and filters have a fixed gain, the transmitted signal’s amplitude is controlled by the DAC voltage.</p>
+<p>One of the circuits in the TX AFE signal chain is a Sallen-Key low pass filter that is used to filter harmonics out of the multiplexer output.  Removing these harmonics converts the output from a square wave to a sine wave.  The output of the Sallen-Key filter is AC-coupled into a linear audio amplifier (the LM3886T), which amplifiers the signal to a maximum voltage swing of ±40V. The output of the amplifier is connected to a TX/RX switch (located on the central board), which in turn is connected to the piezoelectric transducers.</p>
+<p>The RX AFE on each channel amplifies the signal with a high gain, then samples the signal coherently with the other channels. The first stage of the RX front-end is a first-order high-pass filter used for AC coupling and 60Hz rejection. The remaining stages comprise a multi-stage op-amp-based
+amplifier. The final stage of the voltage amplifier drives a series current limiting resistor, AC coupling capacitor, and voltage divider used to bias the signal to a 0-3.3V range. The RX AFE output is sampled at 1 MSPS by a 12-bit ADC (with 10.5 effective bits) embedded in the channel microcontroller. Each channel’s ADC used the same 1MHz clock in order to synchronize the samples. Sampling is triggered by the falling edge of the SYNC signal. Data is stored in RAM via DMA transfer and is offloaded back to the host computer for processing after sampling is complete.</p>
+</section>
+<section id="configuration-options">
+<h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h2>
+<p>The channel board offers a few options to reconfigure the TX and RX analog front-ends.</p>
+<p>The TX Sallen-Key filter is designed to have a corner frequency near the resonant frequency of our specific transducers, which is 92kHz. The resistor and capacitor values of this filter can be changed depending on the resonant frequency of your transducers.</p>
+<p>The RX 1st-order RC high-pass filter (R27 and C23) is tuned to reject 60Hz mains pass-through that was in our testing environment. This can be tuned to your needs, as well.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/skip_use.jpg"><img alt="A figure showing the set of 0 ohm resistor population options" src="_images/skip_use.jpg" style="width: 800px;" /></a>
+</figure>
+<p>The RX amplifier chain has several 0Ω resistor population options that can change the final gain of the RX signal, as seen in the above image. There are three non-inverting amplifiers, each with a gain of approximately 20.8dB. For our tests, a gain of 41.6 dB is used (two amplifier stages are used, one is skipped).</p>
+<p>There is a population option for an AD8337 Variable Gain Amplifier (VGA) on these boards. The gain control voltage is provided by the second DAC channel on the microcontroller. This component was not populated for our tests, and we recommend that this component not be populated if unused.</p>
+<p>The board includes test points for the signal at each stage of the TX chain. There are also test points for all voltage rails. Indication LEDs also display whether a voltage rail is on or not.</p>
+</section>
+<section id="power-connections">
+<h2>Power Connections<a class="headerlink" href="#power-connections" title="Permalink to this heading"></a></h2>
+<p>The five voltage rails — ±40V, ±15V and ground — can be supplied via banana cables from benchtop power supplies. The ±15V rail is used to generate 5V and 3.3V rails, and the -15V rail is used to generate the -5V rail on the board. The ±40V rails are used for the TX audio power amplifier.</p>
+</section>
+<section id="clock-distribution">
+<h2>Clock Distribution<a class="headerlink" href="#clock-distribution" title="Permalink to this heading"></a></h2>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/adc_clock_input.jpg"><img alt="Figure showing the sample clock input pin" src="_images/adc_clock_input.jpg" style="width: 800px;" /></a>
+</figure>
+<p>A shared 1MHz clock must be distributed to each channel board by soldering wires to the appropriate through-hole connection on the channel board. This signal is used to generate each channel’s ADC sampling clock. The shared clock bus ensures that each channel has a synchronized sample period.</p>
+</section>
+<section id="programming-guide">
+<h2>Programming Guide<a class="headerlink" href="#programming-guide" title="Permalink to this heading"></a></h2>
+<p>To program the channel microcontrollers the 15V rail must be provided so that the microcontrollers receive 3.3V. Plug in the JTAG connector from your programming device to the board with the correct orientation. Further instructions can be found in <a class="reference internal" href="flashing_boards.html#ref-flashingboards"><span class="std std-ref">Flashing Boards</span></a>.</p>
+<p>– Tejus Rao</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="motherboard.html" class="btn btn-neutral float-left" title="Motherboard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flashing_boards.html" class="btn btn-neutral float-right" title="Flashing Boards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

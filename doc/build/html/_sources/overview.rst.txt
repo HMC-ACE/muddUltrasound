@@ -1,0 +1,10 @@
+========
+Overview
+========
+
+
+Describe assembly connection: Transducer array -> motherboard -> 9 channel boards -> i2c bus controlled by FTDI breakout -> control computer
+Describe equipment connections: Hook power supplies to channel boards and motherboard by daisy chaining or w/e (star network), it will distribute power
+Describe flashing boards – Atmel compiler, something something, not full depth
+Describe running software on host computer – sends commands from Python over USB
+Describe other subsections – one per board, maybe top level scripts

@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name Boat-Channel-Board-rescue)(type Legacy)(uri "${KIPRJMOD}/Boat Channel Board-rescue.lib")(options "")(descr "")(disabled))
+  (lib (name LMSS)(type Legacy)(uri ${KIPRJMOD}/LMSS.lib)(options "")(descr ""))
+  (lib (name New_Parts)(type Legacy)(uri "${KIPRJMOD}/New Parts.lib")(options "")(descr ""))
+  (lib (name "New Parts")(type Legacy)(uri "${KIPRJMOD}/New Parts.lib")(options "")(descr ""))
+)

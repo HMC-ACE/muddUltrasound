@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="visualize" href="api/visualize.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_software.html">Running Software</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p>Follow the instructions in <a class="reference internal" href="transducer.html#ref-array"><span class="std std-ref">Transducer Array</span></a> to assemble the pzt array.</p></li>
+<li><p>Follow the instructions in <a class="reference internal" href="channelboard.html#ref-channelboard"><span class="std std-ref">Channel Board</span></a> to hook up all power supplies and clock distribution, and ensure there are no shorts between any of the power rails. Flash the boards with the MCU firmware using the directions in <a class="reference internal" href="flashing_boards.html#ref-flashingboards"><span class="std std-ref">Flashing Boards</span></a></p></li>
+<li><p>Follow the instructions in <a class="reference internal" href="motherboard.html#ref-motherboard"><span class="std std-ref">Motherboard</span></a> to hook up each channel board to the motherboard, and the motherboard to the Piezo array.</p></li>
+<li><p>Wire the ft2232h-56q board and 556 timer for i2c communication and sync pulse generation, respectively, as per the directions in <a class="reference internal" href="running_software.html#ref-software"><span class="std std-ref">Communicating with the Array</span></a>. Note the 556 timer should be tuned to a 800 us delay, or <code class="docutils literal notranslate"><span class="pre">PhasedArray.delay</span></code> should be set to what it is tuned to in <code class="docutils literal notranslate"><span class="pre">i2c_cmd.py</span></code>.</p></li>
+<li><p>Follow the instructions in <a class="reference internal" href="running_software.html#ref-software"><span class="std std-ref">Communicating with the Array</span></a> to establish a connection with the boards.</p></li>
+<li><p>Follow the instructions in <a class="reference internal" href="running_software.html#ref-imaging"><span class="std std-ref">Imaging</span></a> to run an imaging script. See the <a class="reference internal" href="running_software.html#ref-api"><span class="std std-ref">API Documentation</span></a> for more detailed software usage.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The imaging speed is severely limited by the transfer times on the i2c bus. A single transmit/receive takes a few seconds, but a 3D scan takes on the order of an hour, since the beam is swept.</p>
+</div>
+<p>– Alec Vercruysse</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api/visualize.html" class="btn btn-neutral float-left" title="visualize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

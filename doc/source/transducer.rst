@@ -1,0 +1,86 @@
+.. _ref-array:
+
+================
+Transducer Array
+================
+
+.. figure:: figs/piezo_array.jpg
+  :width: 400
+  :alt: Image of pzt array.
+
+
+Outline
+-------
+
+This section contains information on the piezoelectric transducer array, the process for coating each transducer with silicone, and guidelines for creating the array assembly. The transducers used are the `American Piezo (APC) 42-1012`_ (may be available as the 42-1011, as well) cylindrical tube.
+
+Soldering to the transducers
+----------------------------
+
+The piezoelectric cylinders are plated with a very delicate layer of metal, which enables us to solder connections to them. Take care to follow the instructions outlined by American Piezo when soldering connections to them. We recommend purchasing the American Piezo `soldering kit`_ to practice soldering to piezo samples. It’s critical to use low-temperature solder and flux, and to minimize the duration of direct heat in contact with the transducers in order to preserve the metal plating on the transducer and prevent the ceramic from cracking.
+
+
+The outer ring of the cylinder is considered to be ground.
+
+The procedure that we used is outlined here:
+
+*Materials (per transducer)*
+ - APC 42-1012 piezo
+ - 5ft of 22 AWG solid-core wire (twisted pairs, usually red and black or white and black)
+ - Flux paste
+ - Low-temperature rosin-core solder
+ - Soldering iron
+ - Flux remover spray or IPA
+ - Kapton or masking tape
+
+
+*Instructions*
+ 1. Secure the piezo cylinder with tape to your work surface
+ 2. Strip about 5mm of insulation off both ends of the wires
+ 3. Apply a layer of solder to the exposed wires (aka tinning)
+ 4. Coat the exposed wire with flux paste. Rosin flux paste will also help the wire adhere to the surface of the piezo before soldering since it is slightly sticky.
+ 5. Mount or hold your wires to the transducer with the ground wire on the outer surface and the signal wire on the inner surface of the cylinder.
+ 6. Melt a bead of solder onto the soldering iron tip
+ 7. Carefully press the melted solder on the tip to the exposed wires on the piezo ring. When the solder has flowed and created a connection, remove the iron. The joint should be flat and shiny.
+ 8. Remove excess flux
+ 
+Coating Process
+---------------
+
+The ceramic transducers have an acoustic impedance that is quite different from that of water. We coat the transducers with a thin layer of silicone, which has an acoustic impedance much closer to that of water, to increase our power transfer into the water. The coating we used is the `Silicone Solutions SS-6B`_.
+
+This process should be completed after soldering wires to the piezos. Note that the process can be messy, so prepare a surface for the excess silicone to drip onto beforehand. We recommend hanging the transducers by their wires over an open area with tape and using paper towels to protect the surface below. We space the transducers a couple inches apart.
+
+.. figure:: figs/pzt1.jpg
+            :width: 600
+            :alt: Inserting the tub of coating around the pzt.
+
+Without moving the piezo, insert the tub of coating around each. Ensure that the entire piezo is coated, along with any exposed wire.
+
+.. figure:: figs/pzt2.jpg
+            :width: 600
+            :alt: Second image, inserting the tub of coating around the pzt.
+
+Slowly remove the tub from the cylinder and repeat on every piezo. Let the coating dry in a well-ventilated area for the manufacturer’s recommended cure time.
+
+.. figure:: figs/pzt3.jpg
+            :width: 600
+            :alt: Drying coated pzt.
+
+.. figure:: figs/pzt4.jpg
+            :width: 600
+            :alt: rack of drying coated pzts.
+
+Assembly
+--------
+
+Our array is encased in a polystyrene shell. This ensures consistent spacing. We use a 1/8” acrylic piece as a backplate for the array, with holes drilled for the transducer wires to pass through. We mount this assembly on a PVC pipe and use zip-ties for strain relief on the transducer wires.
+
+
+
+.. _`American Piezo (APC) 42-1012`: https://www.americanpiezo.com/standard-products/piezo-tubes.html
+.. _`soldering kit`: https://www.americanpiezo.com/standard-products/solder-kit.html
+.. _`Silicone Solutions SS-6B`: https://siliconesolutions.com/conformal-coatings/ss-6bclear.html
+
+
+-- Tejus Rao

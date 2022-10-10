@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i2c_cmd &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="das_scan" href="das_scan.html" />
+    <link rel="prev" title="Running Software" href="../running_software.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../running_software.html">Running Software</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#communicating-with-the-array">Communicating with the Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#imaging">Imaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#file-structure">File Structure</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../running_software.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">i2c_cmd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phasedarray-class">PhasedArray class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channelboard-class">ChannelBoard class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="das_scan.html">das_scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualize.html">visualize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../running_software.html">Running Software</a> &raquo;</li>
+      <li>i2c_cmd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/i2c_cmd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2c-cmd">
+<h1>i2c_cmd<a class="headerlink" href="#i2c-cmd" title="Permalink to this heading"></a></h1>
+<p>This contains the API to do low-level interfacing with the i2c channel.
+Run this script with interactive mode <cite>-i</cite> if running it as main.
+This module contains all the methods that involve direct interaction
+with the array itself, and it defines the <code class="docutils literal notranslate"><span class="pre">PhasedArray</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ChannelBoard</span></code> objects in order to do so.</p>
+<section id="phasedarray-class">
+<h2>PhasedArray class<a class="headerlink" href="#phasedarray-class" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">i2c_cmd.</span></span><span class="sig-name descname"><span class="pre">PhasedArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">muxdac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vgadac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.addrs">
+<span class="sig-name descname"><span class="pre">addrs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[[7,</span> <span class="pre">8,</span> <span class="pre">9],</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">6],</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]]</span></em><a class="headerlink" href="#i2c_cmd.PhasedArray.addrs" title="Permalink to this definition"></a></dt>
+<dd><p>maps the i2c addresses of the elements in the array to the array positions,
+when looking at the array from behind.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.aim_beam">
+<span class="sig-name descname"><span class="pre">aim_beam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.aim_beam" title="Permalink to this definition"></a></dt>
+<dd><p>Aim a plane wave beam towards some x, y, z coordinates in cartesian
+space. x=y=0 points the beam straight out. By the RHR, positive y
+is down (positive x is right when looking behind the array).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – x in meters, pointing right when looking at the array from behind.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – y in meters, pointing down when looking at the array from behind.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – z in meters, pointing out when looking at the array from behind.</p></li>
+<li><p><strong>debug</strong> (<em>boolean</em>) – Whether or not to print the computed phaseshifts in us.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.aim_beam_directional_cosine">
+<span class="sig-name descname"><span class="pre">aim_beam_directional_cosine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.aim_beam_directional_cosine" title="Permalink to this definition"></a></dt>
+<dd><p>alpha is directional cosine along x-axis, beta is along y-axis.
+both are between zero and one, and if the directional cosine along
+the z axis is <cite>gamma</cite>:</p>
+<div class="math notranslate nohighlight">
+\[alpha^2 + beta^2 + gamma^2 = 1\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em>) – x-component (between 0 and 1) of the beam steering direction.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – y-component (between 0 and 1) of the beam steering direction.</p></li>
+<li><p><strong>debug</strong> (<em>boolean</em>) – Whether or not to print the computed phaseshifts in us.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.aim_beam_spherical">
+<span class="sig-name descname"><span class="pre">aim_beam_spherical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.aim_beam_spherical" title="Permalink to this definition"></a></dt>
+<dd><p>aim a plane wave beam, spherical coords in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>float</em>) – theta in radians, angle off the z-axis</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – x in radians, angle off the x-axis in the x-y plane.</p></li>
+<li><p><strong>debug</strong> (<em>boolean</em>) – Whether or not to print the computed phaseshifts in us.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.delay">
+<span class="sig-name descname"><span class="pre">delay</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0008</span></em><a class="headerlink" href="#i2c_cmd.PhasedArray.delay" title="Permalink to this definition"></a></dt>
+<dd><p>seconds between tx and rx start (set by trimming 555 timing pot)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.fs">
+<span class="sig-name descname"><span class="pre">fs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000000.0</span></em><a class="headerlink" href="#i2c_cmd.PhasedArray.fs" title="Permalink to this definition"></a></dt>
+<dd><p>sampling frequency in samples/second</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.garbage_samples">
+<span class="sig-name descname"><span class="pre">garbage_samples</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#i2c_cmd.PhasedArray.garbage_samples" title="Permalink to this definition"></a></dt>
+<dd><p>number of samples to discard after tx/rx switch due to transients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.idx_to_range">
+<span class="sig-name descname"><span class="pre">idx_to_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.idx_to_range" title="Permalink to this definition"></a></dt>
+<dd><p>Convert an index (or array of indexes) to the equivalent
+travel distance for an echo at that point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>integer</em>) – index of a sample in a received echo</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>range</strong> – the range that that index corresponds to in the echo.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.plot_echo">
+<span class="sig-name descname"><span class="pre">plot_echo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_bandpass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'meters'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.plot_echo" title="Permalink to this definition"></a></dt>
+<dd><p>Does not modify beam steering.
+If no data is given, it sends a pulse, reads, plots.
+If data is given (e.g. from self.send_read()), <cite>max_dist</cite> is unused and
+no pulse is sent, just plots.</p>
+<p>In the legend, click on the lines (not the labels, but the lines!) to
+turn visibility on and off for each channel.</p>
+<p>TODO: better visibility toggling, including turning all off.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em><em> or </em><em>None</em>) – If data is passed in (by default, no data), don’t send an echo,
+just plot the data. The data should be in the output format
+of <cite>PhasedArray.send_read()</cite>. If no data is given, this will
+send an echo and plot it.</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em><em> or </em><em>None</em>) – If given, limit the recieved samples to correspond to some maximum
+range of interest. Helpful to reduce the amount of data transferred
+over the i2c bus (which is slow).</p></li>
+<li><p><strong>apply_bandpass</strong> (<em>bool</em>) – whether or not to apply <cite>das_scan.bandpass</cite> to the data before plotting.</p></li>
+<li><p><strong>units</strong> (str, <cite>meters</cite> or <cite>idx</cite>) – Whether to plot the x-axis in terms of equivalent meters range
+or sample index.</p></li>
+<li><p><strong>blocking</strong> (<em>bool</em>) – Whether to stop and wait for the plot to close before continuing or
+keep running the program after the plot has been created.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.send_pulse">
+<span class="sig-name descname"><span class="pre">send_pulse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.send_pulse" title="Permalink to this definition"></a></dt>
+<dd><p>Send a sync pulse via the FTDI chip GPIO
+to start a synchronus pulse/ADC capture.
+See <cite>i2c_cmd.ChannelBoard.send_pulse</cite> for details.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.send_read">
+<span class="sig-name descname"><span class="pre">send_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.PhasedArray.send_read" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the piezo voltage data from all ADCs.
+Note that the echo data does not start at t=0
+(as measured from the start of the pulse)
+but rather the calibrated delay time between the falling edge
+of the sync pulse and the rising edge of the sync pulse.
+As of 2021-07-15 we use a 555 timer to make this pulse delay
+exactly .8ms. (see <cite>PhasedArray.delay</cite>).</p>
+<p>In addition to the tx/rx piezo delay, we need to account for some
+“garbage samples” which contain the transient caused by the tx/rx
+switch itself. These are thrown out immediately.</p>
+<dl class="simple">
+<dt>TODO: consider also returning the start time in seconds of the</dt><dd><p>first sample that we return? Or letting the user choose
+the min_distance.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_dist</strong> (<em>float</em><em> or </em><em>None</em>) – Maximum possible echo distance for which to read samples.
+This takes into account the speed of sound in water, the
+out and back nature of the echo, the delay between the
+tx and rx switch, and the garbage samples discarded at
+the beginning of the ADC capture.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>data</strong> – Time-series ADC voltage data corresponding to each ADC capture
+for every channel. The first two dimensions of the array are
+equal to the dimensions of the <cite>PhasedArray.addrs</cite> (and therefore
+<cite>PhasedArray.boards</cite> array, and the first two indexes correspond
+to the board with equivalent address in the <cite>PhasedArray.addrs</cite>
+array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array, shape (3, 3, nsamples).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.PhasedArray.v">
+<span class="sig-name descname"><span class="pre">v</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1484.0</span></em><a class="headerlink" href="#i2c_cmd.PhasedArray.v" title="Permalink to this definition"></a></dt>
+<dd><p>wave speed in meters/second</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="channelboard-class">
+<h2>ChannelBoard class<a class="headerlink" href="#channelboard-class" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">i2c_cmd.</span></span><span class="sig-name descname"><span class="pre">ChannelBoard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftdiurl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ftdi://ftdi:ft2232h/1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muxdac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vgadac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.MSG_LEN">
+<span class="sig-name descname"><span class="pre">MSG_LEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em><a class="headerlink" href="#i2c_cmd.ChannelBoard.MSG_LEN" title="Permalink to this definition"></a></dt>
+<dd><p>ADC read chunk length before crc32 check.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.SYNC_PIN">
+<span class="sig-name descname"><span class="pre">SYNC_PIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#i2c_cmd.ChannelBoard.SYNC_PIN" title="Permalink to this definition"></a></dt>
+<dd><p>FTDI GPIO pin used for sync (bitmask)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.TOTAL_SAMPLES">
+<span class="sig-name descname"><span class="pre">TOTAL_SAMPLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20480</span></em><a class="headerlink" href="#i2c_cmd.ChannelBoard.TOTAL_SAMPLES" title="Permalink to this definition"></a></dt>
+<dd><p>16bit samples, so we read double the bytes. needs to be a multiple of the
+chunk size because of the logic surrounding the crc check.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard._calc_nbytes">
+<span class="sig-name descname"><span class="pre">_calc_nbytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amnt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard._calc_nbytes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the number of bytes will be read.
+Takes into account <cite>None</cite> and chunk-reading logic.
+Useful for pre-initializing arrays internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>amnt</strong> (<em>integer</em><em> or </em><em>None</em>) – Byte count requested. if None, defaults to the entire buffer.
+If a custom amount, it will be rounded up to a full chunk size.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>amnt</strong> – How many bytes to acutally read/will actually be read.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard._decode_adc_bytes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_decode_adc_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytestring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard._decode_adc_bytes" title="Permalink to this definition"></a></dt>
+<dd><p>Decode a bytestring read from the ADC’s Peripheral DMA
+(only one channel active), uint16_ts w/format LSB, MSB…
+into an array of adc float values.</p>
+<p>This is called by <cite>send_read</cite>, and for normal usage
+is not relevant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bytestring</strong> (<em>bytes object</em>) – raw bytestring coming from i2c read command. Should be an even
+number of bytes, since it describes 2-byte samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>values</strong> – time-series ADC voltage values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard._read_next_chunk">
+<span class="sig-name descname"><span class="pre">_read_next_chunk</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard._read_next_chunk" title="Permalink to this definition"></a></dt>
+<dd><p>Read chunk (size <cite>self.MSG_LEN</cite> bytes) with CRC32 checksum.
+Raises <cite>Exception</cite> if the checksum does not validate.</p>
+<p>This is called by <cite>send_read</cite>, and for normal usage
+is not relevant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>data</strong> – bytes object with <cite>self.MSG_LEN</cite> bytes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bytes object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.get_vpp">
+<span class="sig-name descname"><span class="pre">get_vpp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxdist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.get_vpp" title="Permalink to this definition"></a></dt>
+<dd><p>Assumes a pulse has been sent and ADC capture performed.
+Sends a read with the amount of bytes corresponding to the
+range preferred in <cite>maxdist</cite> (warning: no checks are done to make sure
+this is not more than 2*TOTAL_SAMPLES) and returns the Vpp measured
+from the signal. If <cite>visualize=True</cite>, plot with matplotlib.</p>
+<p>Note that this calculates range for a signal going one way, not
+an echo. This is useful for having an external hydrophone connected
+to the rx of a board instead of the piezo.</p>
+<p>The Vpp calculation is performed by taking the difference between
+the the max and min sample in the recieved data. This works well
+for big pulses, but in the case where SNR is small, it might over-
+estimate the Vpp. (There’s no constraint for the two sampled points
+to be close in time).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_dist</strong> (<em>float</em><em> or </em><em>None</em>) – If given, limit the recieved samples to correspond to some maximum
+range of interest. Helpful to reduce the amount of data transferred
+over the i2c bus (which is slow). Note that because we read
+in chunks, the maximum distance that the graph corresponds to will
+most likely be longer.</p></li>
+<li><p><strong>visualize</strong> (<em>bool</em>) – Whether to plot the signal (blocking) with the Vpp calculation
+visualized.</p></li>
+<li><p><strong>fname</strong> (<em>str</em><em> or </em><em>None</em>) – If provided, a filename to log the read to (as a .npy file)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>vpp</strong> – peak to peak voltage of the given sampling frame.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.reset_bufferidx">
+<span class="sig-name descname"><span class="pre">reset_bufferidx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">try_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.reset_bufferidx" title="Permalink to this definition"></a></dt>
+<dd><p>Reset the buffer index so that a subsequent read operation
+starts from the beginning of the capture.
+Try up to 50 times in case we have i2c bus issues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>try_num</strong> (<em>integer</em>) – Used in the recursive retry logic to see how many times this has
+been tried. if <cite>try_num&gt;=50</cite> and a <cite>i2c.I2cNackError</cite> is raised,
+this will raise it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.restart_capture">
+<span class="sig-name descname"><span class="pre">restart_capture</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.restart_capture" title="Permalink to this definition"></a></dt>
+<dd><p>Send an i2c command to restart an ADC capture.
+This is for debugging only, the timing is inaccurate!
+(don’t restart ADC capture after the pulse w/this)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.send_pulse">
+<span class="sig-name descname"><span class="pre">send_pulse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.send_pulse" title="Permalink to this definition"></a></dt>
+<dd><p>Sends an initial sync pulse to start the pulse, and a second one 1ms
+later to start the ADC capture. We want some delay between the
+two to let the piezo stop ringing before we switch between tx and rx,
+so we achieve this by using a monostable 555 timer between the ftdi and
+sync to get a constant .8ms delay as of 2021-07-17.
+(see <cite>PhasedArray.delay</cite> to get current val)</p>
+<p>On the board side, the MCUs fire on a rising interrupt and start
+receiving on the falling edge.</p>
+<p>The ftdi chip uses GPIO to send a pulse, and as long as every channel
+board is connected to the <cite>sync</cite> bus, they will all recieve it.
+So it doesn’t matter what <cite>ChannelBoard</cite> object this method is called
+on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.send_read">
+<span class="sig-name descname"><span class="pre">send_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amnt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.send_read" title="Permalink to this definition"></a></dt>
+<dd><p>Reads <cite>amnt</cite> <em>bytes</em> from the ADC buffer. Defaults to entire buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amnt</strong> (<em>integer</em><em> or </em><em>None</em>) – Byte count requested. if None, defaults to the entire buffer.
+If a custom amount, it will be rounded up to a full chunk size.</p></li>
+<li><p><strong>try_num</strong> (<em>integer</em>) – Used in the recursive retry logic to see how many times this has
+been tried. if <cite>try_num&gt;=50</cite> and a <cite>i2c.I2cNackError</cite> is raised,
+this will raise it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>res</strong> – Decoded time-series data in units of voltage.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.set_delay">
+<span class="sig-name descname"><span class="pre">set_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">us</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newapi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.set_delay" title="Permalink to this definition"></a></dt>
+<dd><p>set phase delay [in us] for a transmit. Two boards programmed
+with a different <cite>us</cite> value will start their transmissions
+with that difference, even though the <cite>us</cite> value might not
+excactly correspond to the delay between the <cite>sync</cite> edge
+and the tx start.</p>
+<p><cite>newapi=False</cite> is for Tejus’ code before the summer of ‘21</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>us</strong> (<em>float</em>) – The delay w.r.t other boards before starting the pulse tx.
+Accurate to within ~.1 us</p></li>
+<li><p><strong>newapi</strong> (<em>boolean</em>) – Whether or not to use the phase delay programming sequence
+corresponding to the firmware before Summer 2021, or after.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.write" title="Permalink to this definition"></a></dt>
+<dd><p>Write either an integer (e.g. from <cite>BoardApi</cite>) or a <cite>bytes</cite> object
+to the board. On failure, tries 50 times before throwing an error.
+(If <cite>try_num</cite> starts at 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd</strong> (integer or <cite>bytes</cite>) – Pass an integer in (e.g. one from <cite>BoardApi</cite>), or, if multiple
+bytes, a <cite>bytes</cite> object.</p></li>
+<li><p><strong>try_num</strong> (<em>integer</em>) – Used in the recursive retry logic to see how many times this has
+been tried. if <cite>try_num&gt;=50</cite> and a <cite>i2c.I2cNackError</cite> is raised,
+this will raise it.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="i2c_cmd.ChannelBoard.write_dacc">
+<span class="sig-name descname"><span class="pre">write_dacc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#i2c_cmd.ChannelBoard.write_dacc" title="Permalink to this definition"></a></dt>
+<dd><p>Write a <cite>value</cite> (in volts) to a specified DAC channel on the MCU.
+Throws an error if the value is outside the bounds specified in the
+electrical characteristics section of the SAM4S datasheet.
+Assumes the analog reference is an ideal 3.3 volts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em>) – voltage between the adc_ref/6 and 5/6*adc_ref ~(0.55V - 2.75V)</p></li>
+<li><p><strong>channel</strong> (<em>integer</em>) – channel=0: muxdac (controls level of SKout)
+channel=1: vgadac (controls VGA amplification)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../running_software.html" class="btn btn-neutral float-left" title="Running Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="das_scan.html" class="btn btn-neutral float-right" title="das_scan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

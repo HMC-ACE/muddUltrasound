@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Software &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="i2c_cmd" href="api/i2c_cmd.html" />
+    <link rel="prev" title="Flashing Boards" href="flashing_boards.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#communicating-with-the-array">Communicating with the Array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wiring">Wiring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-setup">Software Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#imaging">Imaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-structure">File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/i2c_cmd.html">i2c_cmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/das_scan.html">das_scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/visualize.html">visualize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Running Software</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/running_software.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-software">
+<h1>Running Software<a class="headerlink" href="#running-software" title="Permalink to this heading"></a></h1>
+<p>We communicate with the nine channel boards with a host PC and a FTDI FT2232H-56Q evaluation board, which contains an FTDI FT2232H USB to I2C device. All python software is written to run on the host PC.</p>
+<p>This API documentation provides the docstrings for the methods used to interact with the Phased Array through the FT2232H chip. All PC to board and board to PC communication is done with methods in the <cite>i2c_cmd</cite> module. Also documented here is <cite>das_scan</cite>, which is the module that contains all of the different imaging scripts, and <cite>visualize</cite>, which is the module that allows “replay” of the imaging done in <cite>das_scan</cite>.</p>
+<p>All of these modules are located in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory, and can be run themselves (not just imported).</p>
+<section id="communicating-with-the-array">
+<span id="ref-software"></span><h2>Communicating with the Array<a class="headerlink" href="#communicating-with-the-array" title="Permalink to this heading"></a></h2>
+<section id="wiring">
+<h3>Wiring<a class="headerlink" href="#wiring" title="Permalink to this heading"></a></h3>
+<p>See below for i2c wiring (also documented in <a class="reference external" href="https://eblot.github.io/pyftdi/api/i2c.html#wiring">pyftdi</a>)</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/i2c_wiring.png"><img alt="I2C wiring" src="_images/i2c_wiring.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Fig.1: FT2232H i2c wiring. note the <cite>FT_</cite> prefix won’t appear on the silkscreen of the <cite>FT2232H-56Q</cite> itself.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The SYNC pulse is also generated by the GPIO of the <cite>FT2232H</cite>, and is used by all boards to start a TX operation at the exact same time, and an RX operation at the exact same time. This extremely important to the operation of the phased array since any time difference between the start of the TX or RX operations for different boards will cause destructive phase differences during beamforming. The internal oscillators in the microcontrollers have some frequency offset relative to each other, so the FT2232H provides a SYNC pulse to trigger both the start of the TX and start of the RX operations. The rising edge of the SYNC pulse controls the start of the TX operation, and the falling edge controls the start of the RX operation. We need to have a deterministic and precise amount of time between the start of a TX and the start of an RX, since this delay has to be taken into account when range-finding. Furthermore, we want to be able vary the amount of time between the start of a TX and the start of an RX sequence, since having some delay between the end of the TX and the start of the RX allows the piezos to stop “ringing” before receiving the echo signals. This affects the minimum range that the phased array can image. The FT2232H cannot provide the deterministic timing for the SYNC pulse because it is controlled via USB by a non real time operating system (e.g. the host computer), so the pulse width is non-deterministic. We solve this by using a 555 timer in a <a class="reference external" href="https://www.electronics-tutorials.ws/waveforms/555_timer.html">monostable configuration</a>, with a trim potentiometer to allow us to vary the pulse width. The 555 timer is triggered by a GPIO output of the FT2232H. In our implementation, the 556 timer was tuned to a 800 us delay. If this is changed, <code class="docutils literal notranslate"><span class="pre">PhasedArray.delay</span></code> should be set to what it is tuned to in <code class="docutils literal notranslate"><span class="pre">i2c_cmd.py</span></code>.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/556_wiring.png"><img alt="555/556 wiring for SYNC pulse generation." src="_images/556_wiring.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Fig.2: 555/556 wiring for SYNC pulse generation.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The wiring schematic file can be found in <code class="docutils literal notranslate"><span class="pre">./figs/fish-n-chips-ft2232h</span></code>.</p>
+</section>
+<section id="software-setup">
+<h3>Software Setup<a class="headerlink" href="#software-setup" title="Permalink to this heading"></a></h3>
+<p>To run the python code, first set up a virtual environment using the provided <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">pyfti</span></code> is used to interface with the FTDI FT2232H-56Q evaluation board.</p>
+<p>Ensure the FTDI chip is connected via USB to the host PC. Running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-i</span> <span class="pre">i2c_cmd.py</span></code> will start python in interactive mode, and <cite>i2c_cmd</cite> will create a <cite>PhasedArray</cite> and <cite>ChannelBoard</cite> object for the user to interact with. Running this is the simplest way to check that the host PC is able to communicate with each channel board.</p>
+<p>Once the <cite>ChannelBoard</cite> object is instantiated, <cite>i2c_cmd</cite> facilitates simple analog front-end (AFE) debugging. For example, <code class="docutils literal notranslate"><span class="pre">ChannelBoard.write(BoardApi.START_PWM)</span></code> will indefinitely turn on the PWM for the instantiated channel board. In the REPL, see <code class="docutils literal notranslate"><span class="pre">help(PhasedArray)</span></code>, <code class="docutils literal notranslate"><span class="pre">help(ChannelBoard)</span></code>, and <code class="docutils literal notranslate"><span class="pre">help(BoardAPI)</span></code> for more options.</p>
+<p>To facilitate debugging the receive analog front end, <cite>read_frambuffer.py</cite> enables simple visualization of samples recorded by the ADC of a channel board. Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">read_framebuffer.py</span> <span class="pre">-h</span></code> for usage information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The i2c read/writes fail occasionally, and we make sure to allow for many re-tries when things go wrong, as well as check the integrity of read data with a crc32 checksum. If an i2c or checksum error occurs, it usually resolves within 10 tries, but very rarely takes longer.</p>
+</div>
+</section>
+</section>
+<section id="imaging">
+<span id="ref-imaging"></span><h2>Imaging<a class="headerlink" href="#imaging" title="Permalink to this heading"></a></h2>
+<p>All the code for the different types of swept-beam imaging is housed in <code class="docutils literal notranslate"><span class="pre">das_scan.py</span></code>. Note that each type of imaging takes a very long time – points are scanned in a 2D or 3D space by sending a steered transmit pulse and performing beamforming on the receive. The time taken to perform each set of transmit/receive is limited mostly by the slow speed of the i2c communication.</p>
+<p>Running <cite>das_scan.py</cite> as main will run a spherical imaging script. Note that there will be a prompt for the “setup:”, which is simply a note the user can write in order to name or comment on the specific image run being taken, for when the captured data is later analyzed.</p>
+<p>Logging is enabled by default into a directory called <cite>data/</cite> (relative to the <cite>scripts/</cite> directory). Running <cite>visualize.py</cite>  allows the user to interactively select and view an imaging run to inspect and review.</p>
+<p>To run a 2D scan, try running the <code class="docutils literal notranslate"><span class="pre">scan_x_slice</span></code> function that <cite>das_scan</cite> provides. There is no raw data logging option for this yet.</p>
+</section>
+<section id="file-structure">
+<h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- scripts/
+  - das_scan.py         &lt;- The top-level code for swept-beam imaging.
+  - i2c_cmd.py          &lt;- The code containing the interface to each channel board.
+  - image.py            &lt;- The code to perform delay-sum beamforming.
+  - phaseshifts.py      &lt;- The code to calculate phase shifts for steering directions.
+  - read_framebuffer.py &lt;- Debug code to visualize the output of an ADC capture.
+  - requirements.txt    &lt;- Used to set up a virtual environment with the necessary python packages.
+  - visualize.py        &lt;- Used to visualize (e.g. replay) logged data from das_scan.
+</pre></div>
+</div>
+</section>
+<section id="api-documentation">
+<span id="ref-api"></span><h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/i2c_cmd.html">i2c_cmd</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/i2c_cmd.html#phasedarray-class">PhasedArray class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/i2c_cmd.html#channelboard-class">ChannelBoard class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/das_scan.html">das_scan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.ac_couple"><code class="docutils literal notranslate"><span class="pre">ac_couple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.bandpass"><code class="docutils literal notranslate"><span class="pre">bandpass()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.find_env_peaks"><code class="docutils literal notranslate"><span class="pre">find_env_peaks()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.find_env_peaks_experimental"><code class="docutils literal notranslate"><span class="pre">find_env_peaks_experimental()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.first_peak"><code class="docutils literal notranslate"><span class="pre">first_peak()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_echo_DAS"><code class="docutils literal notranslate"><span class="pre">get_echo_DAS()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_peaks"><code class="docutils literal notranslate"><span class="pre">get_peaks()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_range"><code class="docutils literal notranslate"><span class="pre">get_range()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.halfwave_lowpass"><code class="docutils literal notranslate"><span class="pre">halfwave_lowpass()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.plot_cloud"><code class="docutils literal notranslate"><span class="pre">plot_cloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.scan_x_slice"><code class="docutils literal notranslate"><span class="pre">scan_x_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.scan_y_slice"><code class="docutils literal notranslate"><span class="pre">scan_y_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.spherical_scan"><code class="docutils literal notranslate"><span class="pre">spherical_scan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.spherical_scan_all_peaks"><code class="docutils literal notranslate"><span class="pre">spherical_scan_all_peaks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualize.html">visualize</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_dataset"><code class="docutils literal notranslate"><span class="pre">get_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_params"><code class="docutils literal notranslate"><span class="pre">get_params()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_sorted_trace_files"><code class="docutils literal notranslate"><span class="pre">get_sorted_trace_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.pick_file"><code class="docutils literal notranslate"><span class="pre">pick_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.view_traces"><code class="docutils literal notranslate"><span class="pre">view_traces()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.visualize_scan"><code class="docutils literal notranslate"><span class="pre">visualize_scan()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>– Alec Vercruysse</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="flashing_boards.html" class="btn btn-neutral float-left" title="Flashing Boards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/i2c_cmd.html" class="btn btn-neutral float-right" title="i2c_cmd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

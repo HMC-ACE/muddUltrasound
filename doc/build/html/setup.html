@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_software.html">Running Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h1>
+<section id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this heading"></a></h2>
+<section id="psus">
+<h3>PSUs<a class="headerlink" href="#psus" title="Permalink to this heading"></a></h3>
+<p>The Phased Array requires a lot of different power channels, and, in the absence of a dedicated PSU board (which is on the list of things to do!), requires a complicated PSU setup.</p>
+<p>The main issue is that to generate all the voltage, isolated power supplies need to be used, and only at one point should ground be referenced to earth ground. This helps avoid ground loops. In general, the principle of “star grounding” should be followed as much as possible to avoid signal integrity issues (although we have issues with this, like the ground connections on our i2c/sync bus).</p>
+<p>In the past, +/- 40V was generated with two <cite>VOLTEQ HY5005D</cite> power supplies. The positive of one was linked to the negative of the other, with that point being the ground reference, in order to generate both a positive and negative voltage. Each PSU should draw approximately .5A when all power amps on the channel boards are powered. Note that these rails only power those power amps and central tx/rx switch, so those PSUs don’t need to be on when debugging the MCUs or the receive chain! Furthermore, The power amps we use right now have their heatsinks at -40V, so be careful touching anything (such as probe ground leads, which are earth referenced) to them when these PSUs are on!!</p>
+<p>The 15V rail was generated with a <cite>CircuitSpecialists.com CSI5003X5</cite> PSU. This was set to only 9V, since the 15V rail just gets regulated down to 3v3 (for the MCU) and 5v (for the opamps), and setting it to 9V lets the hydrophone preamp get powered off of it, if necessary. This should draw a little over an amp with everything on, so the <cite>Agilent E3630A</cite> PSUs that are usually in the tank room <em>won’t</em> work for this!</p>
+<p>The -15V rail was generated with an incredibly massive and sketchy PSU (it was unregulated, so it’s voltage was a function of current draw). I would recommend looking for another PSU, but again it needs to handle more than .5A of power (the Agilent PSU didn’t work). This rail powers just the opamps in the tx and rx chain.</p>
+<p>The ft2232h chip and the 556 timer are driven from the USB bus. Note that when everything is powered, The chip will still have power via USB, which it might try to use to “back power” some of the MCUs via the i2c rail. A similar situation happens with the jlink chip. Disconnect these when turning power off to the array.</p>
+<p>Make sure to use a multimeter to check that there is no continuity between any of the rails before powering everything on!</p>
+</section>
+<section id="ft2232h">
+<h3>ft2232h<a class="headerlink" href="#ft2232h" title="Permalink to this heading"></a></h3>
+<p>This chip is now what we use to connect to the computers via the i2c connection. We switched in spring 2021 since the buspirate was very slow, especially when reading the large amounts of data during an rx sequence. We used the <cite>ft2232h-56Q</cite> evaluation board the whole time so that we did not have to deal with rolling our own board. Note, however, that this solution is still suboptimal, since the FT2232H cannot tri-state the buffer (see <a class="reference external" href="https://eblot.github.io/pyftdi/api/i2c.html#open-collector-bus">pyftdi documentation</a>). Furthermore, i2c over such long distances with so many devices isn’t great for neither EMI nor rise-times (due to bus capacitance). It is generally a pretty slow communications protocol, so in the future, we are trying to switch.</p>
+<p>The i2c read/writes fail occasionally, and we make sure to allow for many re-tries when things go wrong, as well as check the integrity of read data with a crc32 checksum. If an i2c or checksum error occurs, it usually resolves within 10 tries, but very rarely takes longer. It has never taken 50!</p>
+<p>See below for i2c wiring (also documented in <a class="reference external" href="https://eblot.github.io/pyftdi/api/i2c.html#wiring">pyftdi</a>)</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/i2c_wiring.png"><img alt="I2C wiring" src="_images/i2c_wiring.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Fig.1: FT2232H i2c wiring. note the <cite>FT_</cite> prefix won’t appear on the silkscreen of the <cite>FT2232H-56Q</cite> itself. The pullups on the bus are implemented as bodge jobs on channel board 9, soldered to the output of it’s 3v3 regulator. In the future, powering them off the 3v3 rail from the <cite>ft2232h-56q</cite>  is most likely a better idea.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The sync pulse is also generated by the GPIO of the <cite>ft2232h</cite>, and is used by all boards to start a tx at the exact same time, and an rx at the exact same time. This extremely important to the operation of the phased array since any small delay introduced between the starts of tx/rx for different boards will mess up beamforming. The MCU clocks are not exactly the same, so we provide a sync pulse for both the start of the tx and the start of the rx, to “re-sync” the MCUs). The rising edge of the sync pulse controls a tx start, and the falling edge controls an rx start. We need to have a deterministic and price amount of time between the start of a tx and the start of an rx, since this delay has to be taken into account when range-finding. Furthermore, we want to be able vary the amount of time between the start of a tx and the start of an rx sequence, since having some delay between the end of the tx and the start of the rx allows the piezos to stop “ringing” before getting ready to receive the pulse. In practice, this just effects the minimum range that the phased array can image. the FT2232H cannot provide the deterministic timing for the sync pulse because it is controlled via USB by a non real time operating system (e.g. your computer), so the pulse width is non-deterministic. We solve this by using a 555 timer in a <a class="reference external" href="https://www.electronics-tutorials.ws/waveforms/555_timer.html">monostable configuration</a>, with a trim potentiometer to allow us to vary the pulse width. In practice, the stock room only has a 556 timer (basically two 555 timers in the same package), so we used this with some pins disconnected. See the wiring diagram:</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/556_wiring.png"><img alt="556 wiring for sync pulse generation." src="_images/556_wiring.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Fig.2: 556 wiring for sync pulse generation. This was done on the breadboard next to channel 1.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The entire wiring schematic (and kicad project file) can be found at
+<code class="docutils literal notranslate"><span class="pre">./figs/fish-n-chips-ft2232h</span></code></p>
+</section>
+</section>
+<section id="fn-generator">
+<h2>fn generator<a class="headerlink" href="#fn-generator" title="Permalink to this heading"></a></h2>
+<p>We use a synced clock (bodge job) for the ADCs. Use a function generator for 1MHz square wave hooked up to the green clock distribution network. It should come in on extraio2.</p>
+<section id="piezos">
+<h3>Piezos<a class="headerlink" href="#piezos" title="Permalink to this heading"></a></h3>
+<p>The wires for the piezos can be screwed into the central channel board by matching the number on the masking tape on the wire to the number on the label next to the channel board that the number corresponds to. These two digit numbers were meant to correspond to the row, col position of each piezo, but in reality, it’s flipped. Note that the channel numbers on the central board do not correspond to any sort of channel location or i2c address, they are only internal to the switch board itself. In this documentation, boards are usually referred to by their i2c channel. Channel 1 is closest to the ft2232h chip, and the channels increase clockwise, until channel 9 at the end.</p>
+<p>Note that to actually figure out where channel is given it’s i2c address, see <a class="reference internal" href="api/i2c_cmd.html#i2c_cmd.PhasedArray.addrs" title="i2c_cmd.PhasedArray.addrs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">i2c_cmd.PhasedArray.addrs</span></code></a>. (it’s more clear to look directly at the <cite>i2c_cmd.py</cite> source file). Looking at the array from behind, this 2D array maps the piezo position to the i2c address of the board that controls it.</p>
+<p>Make sure the tx/rx switch has the corresponding BNC wired to each channel board, and the channel board PAout is hooked up to the channelboard. Only one Channelboard’s tx/rx switch needs to be hooked up to the AB input on the central board (we used channel 1).</p>
+</section>
+</section>
+<section id="software">
+<h2>Software<a class="headerlink" href="#software" title="Permalink to this heading"></a></h2>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this heading"></a></h3>
+<p>On the python side, you should be working in a <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a>. Verify you have an up-to-date python installation (I used python 3.9.6) and then, in a mac/linux shell in the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory of the repository, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m venv venv_array</span>
+<span class="go">source venv_array/bin/activate</span>
+<span class="go">pip install -r requirements.txt</span>
+</pre></div>
+</div>
+<p>To create and activate the venv with all dependencies. Note that the commands in windows are slightly different, particularly the activation in the middle line. I believe running the <code class="docutils literal notranslate"><span class="pre">activate.bat</span></code> file in <code class="docutils literal notranslate"><span class="pre">venv_array/bin/</span></code> will suffice there.</p>
+<p>Lastly, there is some additional setup for <cite>pftdi</cite> to install the proper USB drivers: <a class="reference external" href="https://eblot.github.io/pyftdi/installation.html#prerequisites">install instructions</a></p>
+</section>
+<section id="sam4s-development">
+<h3>Sam4s development<a class="headerlink" href="#sam4s-development" title="Permalink to this heading"></a></h3>
+<p>To program the channel boards themselves, we use <a class="reference external" href="https://www.microchip.com/en-us/development-tools-tools-and-software/microchip-studio-for-avr-and-sam-devices#tabs">Microchip studio</a>, which unfortunately only works on Windows. Over summer ‘21, we used an E79 laptop to run this.</p>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">.atsln</span></code> (“atmel solution”, atmel being the name for the company that made the SAM4S before it got acquired) project file to get started.</p>
+<p>We’ve tried to, for the most part, stick to using the <a class="reference external" href="https://asf.microchip.com/docs/latest/search.html?device=sam4s">“Advanced Software Framework”</a> (ASF), which is a Hardware Abstraction Layer (HAL) that should, theoretically, ease development. In reality, while it does sometimes help to provide a board-agnostic layer, and is certainly helpful in some cases, it often causes trouble, and in reality, when bringing up (or modifying) peripherals, an in-depth understanding of the peripheral’s user interface is usually needed. The <a class="reference external" href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11100-32-bit%20Cortex-M4-Microcontroller-SAM4S_Datasheet.pdf">SAM4s datasheet</a> has good documentation of the SAM4s, and there exists a website do document <a class="reference external" href="https://asf.microchip.com/docs/latest/search.html?device=sam4s">ASF</a> as well. In practice, it is also helpful to use the “go to definition” feature in Microchip Studio to open the ASF file where the function is implemented in the first place and get an idea of what is going on, since the ASF documentation is unclear.</p>
+<p>Note that we bypass the ASF in the case of the <code class="docutils literal notranslate"><span class="pre">PIOA</span></code> interrupt handler, because the ASF-provided interrupt handler is super bloated. We replace the interrupt vector table (table containing all of the addresses to interrupt handlers) in order to bypass this. See comments in the <code class="docutils literal notranslate"><span class="pre">src/main.c</span></code> file itself for info. This file contains everything except for the clock configuration, which can be found in <code class="docutils literal notranslate"><span class="pre">src/config/conf_clock.h</span></code>, and the crc calculation code taken from the internet (in public domain), which can be found in <code class="docutils literal notranslate"><span class="pre">lib/crc.h</span></code></p>
+<p>To use a new peripheral for the first time, the specific module first needs to be loaded using the “ASF Wizard”.</p>
+<p>To actually program the sam4s, you need to use the Jlink programmer. Go <cite>tools &gt; device programming</cite> to select the options for this. Make sure that everything is wired right and connected by reading the voltage of the bus, and it should be 3.3v. Then you can try reading the device ID.</p>
+<p>The cable/connector used to connect to the MCU is often kind of sketchy, so don’t freak out if it cannot connect. Try moving the connector around, or even pulling it out halfway, which often improves the connection.</p>
+<p>Note that you need to set the specific flavor of SAM4s MCU that you are using before you can program it, because it checks the device ID. Most channel boards (1-7) have the <code class="docutils literal notranslate"><span class="pre">SAM4S4B</span></code> MCU, but the last two have <code class="docutils literal notranslate"><span class="pre">SAM4SA16B</span></code> MCUs since they were assembled during the chip-shortage following the pandemic when the other MCUs were no longer available. They are pin-compatible, follow the same datasheet, and the only real difference is memory/flash size and the existence of a special cache that we don’t use.</p>
+<p>Remember when programming all channel boards that you need to change the i2c address when you change the board you’re programming!! An easy way to check that you didn’t mess this up is try running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-i</span> <span class="pre">i2c_cmd.py</span></code> and see if the instantiation of the PhasedArray object chokes up when addressing the channel boards to write DAC values.</p>
+</section>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
+<p>Building this doc uses sphinx. Ensure the python venv is activated, and, in the <code class="docutils literal notranslate"><span class="pre">doc</span></code> folder, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean;</span> <span class="pre">make</span> <span class="pre">html</span></code> in a terminal to build. all files should appear in <code class="docutils literal notranslate"><span class="pre">doc/build</span></code>.</p>
+<p>The pip packages <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> and <code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code> are required to build this documentation, as well as python packages required to import the documented modules: <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, and <code class="docutils literal notranslate"><span class="pre">pyftdi</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>das_scan &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="visualize" href="visualize.html" />
+    <link rel="prev" title="i2c_cmd" href="i2c_cmd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../running_software.html">Running Software</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#communicating-with-the-array">Communicating with the Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#imaging">Imaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../running_software.html#file-structure">File Structure</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../running_software.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="i2c_cmd.html">i2c_cmd</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">das_scan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.ac_couple"><code class="docutils literal notranslate"><span class="pre">ac_couple()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.bandpass"><code class="docutils literal notranslate"><span class="pre">bandpass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.find_env_peaks"><code class="docutils literal notranslate"><span class="pre">find_env_peaks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.find_env_peaks_experimental"><code class="docutils literal notranslate"><span class="pre">find_env_peaks_experimental()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.first_peak"><code class="docutils literal notranslate"><span class="pre">first_peak()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.get_echo_DAS"><code class="docutils literal notranslate"><span class="pre">get_echo_DAS()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.get_peaks"><code class="docutils literal notranslate"><span class="pre">get_peaks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.get_range"><code class="docutils literal notranslate"><span class="pre">get_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.halfwave_lowpass"><code class="docutils literal notranslate"><span class="pre">halfwave_lowpass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.plot_cloud"><code class="docutils literal notranslate"><span class="pre">plot_cloud()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.scan_x_slice"><code class="docutils literal notranslate"><span class="pre">scan_x_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.scan_y_slice"><code class="docutils literal notranslate"><span class="pre">scan_y_slice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.spherical_scan"><code class="docutils literal notranslate"><span class="pre">spherical_scan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#das_scan.spherical_scan_all_peaks"><code class="docutils literal notranslate"><span class="pre">spherical_scan_all_peaks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="visualize.html">visualize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../running_software.html">Running Software</a> &raquo;</li>
+      <li>das_scan</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/das_scan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-das_scan">
+<span id="das-scan"></span><h1>das_scan<a class="headerlink" href="#module-das_scan" title="Permalink to this heading"></a></h1>
+<p>Alec Vercruysse</p>
+<p>This module contains code for running different types of swept-beam imaging.</p>
+<dl class="simple">
+<dt>The top-level imaging functions that can be run are:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">spherical_scan</span></code></dt><dd><p>(old, scan a range of theta &amp; phi, finding and returning
+the first peak, and visualizing in 3D)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">spherical_scan_all_peaks</span></code></dt><dd><p>(scan a range of theta &amp; phi, finding and
+returning <em>multiple</em> peaks per capture, and visualizing in 3D)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scan_x_slice</span></code></dt><dd><p>(scan accross the x direction, centered vertically,
+visualizing the result like a ultrasound scan in 2D).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scan_y_slice</span></code></dt><dd><p>(scan accross the y direction, centered horizontally,
+visualizing the result like an ultrasound scan in 2D).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">spherical_scan_all_peaks</span></code> provides the best results in 3D. Running
+this module directly will run such a scan and produce a figure.</p>
+<p>These scans all take a very long time to run due to limitations of the
+architecture of the system itself: all raw scan data has to be offloaded
+to the computer via the slow and marginal i2c bus, one channel at a time,
+before the delay-and-sum, enveloping, and peak-detection is completed.
+To speed up debug (as well as have a log of the images we’ve taken),
+the raw adc data can be saved, allowing for a “replay” of the algorithm,
+with ADC data stored in files rather than being generated in real-time
+by the array. See <code class="docutils literal notranslate"><span class="pre">visualize.py</span></code> for the functions that do this for the
+spherical imaging scans.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.ac_couple">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">ac_couple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.ac_couple" title="Permalink to this definition"></a></dt>
+<dd><p>Perform a 1st-rder high-pass filter on the time-series data to
+AC-couple it (analagous to an R/C filter).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – time-series signal</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – sampling frequency</p></li>
+<li><p><strong>cutoff</strong> (<em>float</em>) – cutoff frequency of the filter in Hz</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>high_passed</strong> – filtered data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.bandpass">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">bandpass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.bandpass" title="Permalink to this definition"></a></dt>
+<dd><p>3rd-order bandpass filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – time-series signal</p></li>
+<li><p><strong>bandwidth</strong> (<em>integer</em>) – bandwidth in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>integer</em>) – sampling frequency of the data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>filtered</strong> – filtered time-series signal.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.find_env_peaks">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">find_env_peaks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envelope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.find_env_peaks" title="Permalink to this definition"></a></dt>
+<dd><p>Find all relevant peaks in an envelope, returning an array of indexes.
+This more or less wraps scipy’s <cite>signal.find_peaks</cite> method, calling it
+with a <cite>prominence</cite> argument based on some percentage of the maximum
+of the given envelope. See the scipy doc for more details on
+topographic prominence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>envelope</strong> (<em>np.array</em>) – time-series envelope of the signal</p></li>
+<li><p><strong>visualize</strong> (<em>bool</em>) – if True, visualize the peak-detection algorithm by plotting all
+peaks in the envelope and the threshold for prominence
+each neighboring dip (by plotting the envelope plus the prominence
+threhsold for all points)</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes object</em>) – if <cite>visualize</cite> is true, a set of axes on which to plot.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>peaks</strong> – all peaks as indexes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.find_env_peaks_experimental">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">find_env_peaks_experimental</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envelope</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.find_env_peaks_experimental" title="Permalink to this definition"></a></dt>
+<dd><p>Drop-in replacement for <cite>find_env_peaks</cite> without visualization
+capabilities. Used in <code class="docutils literal notranslate"><span class="pre">visualize.py</span></code> to visualize an alternative
+peak-finding method based solely on absolute height rather
+than prominence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>envelope</strong> (<em>np.array</em>) – time-series envelope of signal</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>peaks</strong> – list of peaks as indexes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.first_peak">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">first_peak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envelope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.first_peak" title="Permalink to this definition"></a></dt>
+<dd><p>Finds the index of the first peak in the envelope. Naive algorithm.
+Selects the first peak by finding the point where the data goes
+above the mean value + <cite>pct</cite> from mean to max, and where the data goes back
+under. then finds the argmax in that section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>envelope</strong> (<em>array</em>) – time-series envelope data.</p></li>
+<li><p><strong>pct</strong> (<em>float</em>) – the amount of above the mean (the range of mean to max scaled by pct)
+to find the peak section to argmax.</p></li>
+<li><p><strong>visualize</strong> (<em>bool</em>) – whether or not to plot a graph (non-blocking) showing the peak
+and treshold.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes object</em><em> or </em><em>None</em>) – if <cite>visualize</cite> is True, the axis to do the visualization on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>peak_idx</strong> – index of the first peak in the array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.get_echo_DAS">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">get_echo_DAS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.get_echo_DAS" title="Permalink to this definition"></a></dt>
+<dd><p>Given a direction, aim the beam, perform a pulse, and return the
+delay-and-summed echo data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>i2c_cmd.PhasedArray object</em>) – </p></li>
+<li><p><strong>theta</strong> (<em>float</em>) – angle from the z-axis in radians</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – angle from the x-axis in the x-y plane</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em>) – the maximum range for which the echo should be retrieved.
+setting this allows the function to return more quickly since
+less data will need to be read from the MCU.</p></li>
+<li><p><strong>log</strong> (<em>string</em><em> or </em><em>None</em>) – path (folder) to log the raw ADC reads from, or None</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – additional string to append to the autogenerated path name if
+logging the pulse.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>echo</strong> – time-series delay-summed echo data (sampled at 1 MHz)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.get_peaks">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">get_peaks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope=&lt;function</span> <span class="pre">halfwave_lowpass&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find_peaks=&lt;function</span> <span class="pre">find_env_peaks&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_fig=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label=''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.get_peaks" title="Permalink to this definition"></a></dt>
+<dd><p>This is to <cite>spherical_scan_all_peaks</cite> what <cite>get_range</cite> is to
+<cite>spherical_scan</cite>. The big difference in args is the <cite>find_peaks</cite>
+kwarg in place of <cite>peak_idx</cite>.</p>
+<p>Find the range of potential object(s) in the (theta, phi) direction by
+finding the peaks in the envelope of a delay-and-summed echo by sending
+a ping in that direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<a class="reference internal" href="i2c_cmd.html#i2c_cmd.PhasedArray" title="i2c_cmd.PhasedArray"><em>i2c_cmd.PhasedArray</em></a>) – </p></li>
+<li><p><strong>theta</strong> (<em>float</em>) – angle from the z-axis in radians</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – angle from the x-axis in the x-y plane</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em>) – the maximum range for which the echo should be retrieved.
+setting this allows the function to return more quickly since
+less data will need to be read from the MCU.</p></li>
+<li><p><strong>envelope</strong> (<em>function</em>) – function operating on time-series data that returns its envelope</p></li>
+<li><p><strong>find_peaks</strong> (<em>function</em>) – function operating on time-series data that returns all peaks
+(see src for visualization-related kwargs it must accept)</p></li>
+<li><p><strong>debug_fig</strong> (<em>matplotlib figure object</em><em> or </em><em>None</em>) – either a matplotlib figure with at least two axis on which the
+visualization will be plotted, or None, in which case a figure
+will be created.</p></li>
+<li><p><strong>log</strong> (<em>string</em><em> or </em><em>None</em>) – path (folder) to log the raw ADC reads from, or None</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – additional string to append to the autogenerated path name if
+logging the pulse.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>r</strong> (<em>float</em>) – the range that all found peaks correspond to</p></li>
+<li><p><strong>mag</strong> (<em>float</em>) – the magnitude of the enveloped signal that each peak corresponds to</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.get_range">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">get_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope=&lt;function</span> <span class="pre">halfwave_lowpass&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_idx=&lt;function</span> <span class="pre">first_peak&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_fig=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label=''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.get_range" title="Permalink to this definition"></a></dt>
+<dd><p>Find the range of an object in the (theta, phi) direction by finding the
+first peak in the envelope of a delay-and-summed echo by sending a ping
+in that direction.</p>
+<p>Kwargs allow for visualization (non-blocking) and logging of the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<a class="reference internal" href="i2c_cmd.html#i2c_cmd.PhasedArray" title="i2c_cmd.PhasedArray"><em>i2c_cmd.PhasedArray</em></a>) – </p></li>
+<li><p><strong>theta</strong> (<em>float</em>) – angle from the z-axis in radians</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – angle from the x-axis in the x-y plane</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em>) – the maximum range for which the echo should be retrieved.
+setting this allows the function to return more quickly since
+less data will need to be read from the MCU.</p></li>
+<li><p><strong>envelope</strong> (<em>function</em>) – function operating on time-series data that returns its envelope</p></li>
+<li><p><strong>peak_idx</strong> (<em>function</em>) – function operating on time-series data that returns the first peak
+(see src for visualization-related kwargs it must accept)</p></li>
+<li><p><strong>visualize</strong> (<em>bool</em>) – whether or not to visualize the the envelope of the signal and
+the first peak computed (non-blocking).</p></li>
+<li><p><strong>debug_fig</strong> (<em>matplotlib figure object</em><em> or </em><em>None</em>) – either a matplotlib figure with at least two axis on which the
+visualization will be plotted, or None, in which case a figure
+will be created.</p></li>
+<li><p><strong>log</strong> (<em>string</em><em> or </em><em>None</em>) – path (folder) to log the raw ADC reads from, or None</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – additional string to append to the autogenerated path name if
+logging the pulse.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>r</strong> (<em>float</em>) – the range that the first found echo correpsonds to</p></li>
+<li><p><strong>mag</strong> (<em>float</em>) – the magnitude of the enveloped signal that the peak corresponds to</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.halfwave_lowpass">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">halfwave_lowpass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.halfwave_lowpass" title="Permalink to this definition"></a></dt>
+<dd><p>Simple envelope function, half-wave rectification + low-pass filter.
+Analogous to the diode+capacitor in a simple AM demodulator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – time-series signal.</p></li>
+<li><p><strong>cutoff</strong> (<em>float</em>) – cutoff frequency in Hz of the lowpasss filter post-rectification.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – sampling frequency of the data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>envelope</strong> – envelope of the time-series signal</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.plot_cloud">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">plot_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.plot_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a point cloud. Click on the colorbar to filter out points
+whose magnitudes are lower than the specified threshold.</p>
+<p>TODO: the colorbar filtering only seems to work when invoked by
+<cite>visualize.py</cite> and not when invoked by <cite>spherical_scan_*</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em><em>, </em><em>size</em><em> (</em><em>n</em><em>, </em><em>4</em><em>)</em>) – point-cloud data, where the second axis is
+[theta, phi, r, magnitude]</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes object</em><em> or </em><em>None</em>) – The axes on which to plot the data. If None, a new figure
+will be created. If <cite>ax</cite> is passed, it must be a 3D projection.</p></li>
+<li><p><strong>cbar</strong> (<em>matplotlib colorbar object.</em>) – The colorbar object that  displays the colorbar for
+potentially pre-existing points on the axis. If invoking
+<cite>point_cloud</cite> multiple times, this needs to be kept and passed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlob axis object</em>) – In case of multiple calls to <cite>plot_cloud</cite> in order to update the plot,
+the axes is returned.</p></li>
+<li><p><strong>cbar</strong> (<em>matplotlib colorbar object</em>) – In case of multiple calls to <cite>plot_cloud</cite> in order to update the plot,
+the colorbar object is returned.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.scan_x_slice">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">scan_x_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_bandpass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.scan_x_slice" title="Permalink to this definition"></a></dt>
+<dd><p>Scan accross the x-axis, vertically centered.
+Produce a 2D scan image similar to a medical ultrasound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_angle</strong> (<em>float</em>) – maximum angle away from the center, in “units” of <em>directional cosine</em>,
+to scan the array.</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em>) – the maximum range for which the echo should be retrieved.
+setting this allows the function to return more quickly since
+less data will need to be read from the MCU.</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – The number of steps between the leftmost and rightmost angles to scan.
+This is the number of pulses that are sent out, and affects resolution.</p></li>
+<li><p><strong>apply_bandpass</strong> (<em>bool</em>) – Whether or not to apply <cite>das_scan.bandpass</cite> to the raw adc data in order
+to reduce noise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>r</strong> – array containing all points in the final image. It has shape (n, 4)
+where n is a large number of points. Each point appears as a row,
+the first column describes the x-directional cosine of the point,
+the second the y-directional cosine of the point, the third
+describes the radius from the center, and the last describes the
+magnitude of the point (the magnitude of the envelope function
+evaluated at the point).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is an imaging function and ultimately produces a figure via matplotlib
+(that can be saved). The return value is mainly for debugging/recreating
+the plot with different parameters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.scan_y_slice">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">scan_y_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_bandpass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.scan_y_slice" title="Permalink to this definition"></a></dt>
+<dd><p>Scan accross the y-axis, horizontally centered.
+Produce a 2D scan image similar to a medical ultrasound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_angle</strong> (<em>float</em>) – maximum angle away from the center, in “units” of <em>directional cosine</em>,
+to scan the array.</p></li>
+<li><p><strong>max_dist</strong> (<em>float</em>) – the maximum range for which the echo should be retrieved.
+setting this allows the function to return more quickly since
+less data will need to be read from the MCU.</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – The number of steps between the leftmost and rightmost angles to scan.
+This is the number of pulses that are sent out, and affects resolution.</p></li>
+<li><p><strong>apply_bandpass</strong> (<em>bool</em>) – Whether or not to apply <cite>das_scan.bandpass</cite> to the raw adc data in order
+to reduce noise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>r</strong> – array containing all points in the final image. It has shape (n, 4)
+where n is a large number of points. Each point appears as a row,
+the first column describes the x-directional cosine of the point,
+the second the y-directional cosine of the point, the third
+describes the radius from the center, and the last describes the
+magnitude of the point (the magnitude of the envelope function
+evaluated at the point).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is an imaging function and ultimately produces a figure via matplotlib
+(that can be saved). The return value is mainly for debugging/recreating
+the plot with different parameters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.spherical_scan">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">spherical_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_range=(1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_range=(0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0.7853981633974483)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_range=(0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">6.283185307179586)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize_debug=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_idx=&lt;function</span> <span class="pre">first_peak&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope=&lt;function</span> <span class="pre">halfwave_lowpass&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log='data/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.spherical_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Performs the imaging scan discussed with Prof. Spencer 2021-06-11.
+Scans through <cite>theta</cite> and <cite>phi</cite> of a spherical coordinate system
+by steering a beam in that direction and recieving the echo
+with delay-and-sum, and uses the peak finding function <cite>peak_idx</cite>
+and the envelope function <cite>envelope</cite> to return the nearest echo and
+its magnitude.</p>
+<p>This plots the image in 3D space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<a class="reference internal" href="i2c_cmd.html#i2c_cmd.PhasedArray" title="i2c_cmd.PhasedArray"><em>i2c_cmd.PhasedArray</em></a>) – PhasedArray object</p></li>
+<li><p><strong>r_range</strong> (<em>tuple</em>) – range of possible r values (in meters).
+The minimum is limited by the time delay between the start of the pulse
+and the start of the most delayed channel’s ADC capture.
+(TODO the min range logic here).</p></li>
+<li><p><strong>theta_range</strong> (<em>tuple</em>) – range of possible <cite>theta</cite> (degrees) to scan.
+Generally sidelobe-dependent.
+Array lies on z-axis, 0 - pi/4 radians is acceptable.</p></li>
+<li><p><strong>phi_range</strong> (<em>tuple</em>) – range of possible <cite>phi</cite> to scan. All 2-pi radians is default.</p></li>
+<li><p><strong>steps</strong> (<em>integer</em>) – the number of points to sample in each angular range (theta and phi)</p></li>
+<li><p><strong>visualize_debug</strong> (<em>bool</em>) – whether or not to visualize the peak-finding in each delay-and-summed
+signal (see <cite>get_range</cite> for plotting details). Non-blocking.</p></li>
+<li><p><strong>peak_idx</strong> (<em>function</em>) – function operating on time-series data that returns the first peak
+(see <cite>get_range</cite> src for visualization-related kwargs it must accept)</p></li>
+<li><p><strong>envelope</strong> (<em>function</em>) – function operating on time-series data that returns its envelope</p></li>
+<li><p><strong>log</strong> (<em>string</em><em> or </em><em>None</em>) – path to log folder in which each run of this command will create a
+unique subdirectory with all raw ADC echo data. To remain unique,
+each folder is titled with the date and time of the scan run. This
+means that no two spherical scans can be started in the same minute,
+which, unless debugging, never happens since scans take so long.
+This script also produces a log file with the setup as well as
+parameters and potential i2c issues encountered during the run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>mags</strong> (<em>np.array</em>) – list of magnitudes corresponding to each peak in the final image.</p></li>
+<li><p><strong>rs</strong> (<em>np.array</em>) – list of ranges corresponding to each peak in the final image.</p></li>
+<li><p><strong>mphi</strong> (<em>np.array</em>) – list of <cite>phi</cite> angles corresponding to each peak in the final image.</p></li>
+<li><p><strong>mtheta</strong> (<em>np.array</em>) – list of <cite>theta</cite> angles corresponding to each peak in the final image.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="das_scan.spherical_scan_all_peaks">
+<span class="sig-prename descclassname"><span class="pre">das_scan.</span></span><span class="sig-name descname"><span class="pre">spherical_scan_all_peaks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_range=(1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_range=(0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0.7853981633974483)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_range=(0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">6.283185307179586)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_steps=20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_steps=50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize_debug=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envelope=&lt;function</span> <span class="pre">halfwave_lowpass&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log='data/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setup='no</span> <span class="pre">setup</span> <span class="pre">notes'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#das_scan.spherical_scan_all_peaks" title="Permalink to this definition"></a></dt>
+<dd><p>Performs a 3D imaging scan similar to <cite>spherical_scan</cite>, but instead
+of choosing a single peak to plot, it plots all peaks detected.
+This ultimately yields a more informative image as long as proper filtering
+of peaks is applied, possibly in <cite>visualize.py</cite> post-hoc.</p>
+<p>This plots the image in 3D space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<a class="reference internal" href="i2c_cmd.html#i2c_cmd.PhasedArray" title="i2c_cmd.PhasedArray"><em>i2c_cmd.PhasedArray</em></a>) – PhasedArray object</p></li>
+<li><p><strong>r_range</strong> (<em>tuple</em>) – range of possible r values (in meters).
+The minimum is limited by the time delay between the start of the pulse
+and the start of the most delayed channel’s ADC capture.
+(TODO the logic here).</p></li>
+<li><p><strong>theta_range</strong> (<em>tuple</em>) – range of possible <cite>theta</cite> (degrees) to scan.
+Generally sidelobe-dependent.
+Array lies on z-axis, 0 - pi/4 radians is acceptable.</p></li>
+<li><p><strong>phi_range</strong> (<em>tuple</em>) – range of possible <cite>phi</cite> to scan. All 2-pi radians is default.</p></li>
+<li><p><strong>theta_steps</strong> (<em>integer</em>) – the number of points to sample in the theta angular range.</p></li>
+<li><p><strong>phi_steps</strong> (<em>integer</em>) – the number of points to sample in the phi angular range.</p></li>
+<li><p><strong>visualize_debug</strong> (<em>bool</em>) – whether or not to visualize the peak-finding in each delay-and-summed
+signal (see <cite>get_peaks</cite> for plotting details). Non-blocking.</p></li>
+<li><p><strong>envelope</strong> (<em>function</em>) – function operating on time-series data that returns its envelope.</p></li>
+<li><p><strong>log</strong> (<em>string</em><em> or </em><em>None</em>) – path to log folder in which each run of this command will create a
+unique subdirectory with all raw ADC echo data. To remain unique,
+each folder is titled with the date and time of the scan run. This
+means that no two spherical scans can be started in the same minute,
+which, unless debugging, never happens since scans take so long.
+Detailed visualization and inspection of the raw data (including of
+the 3D image the scan produces) can be accomplished with <cite>visualize.py</cite>
+This script also produces a log file with the setup as well as
+parameters and potential i2c issues encountered during the run.</p></li>
+<li><p><strong>setup</strong> (<em>string</em>) – notes on the setup to be logged in the logfile
+(if a log directory is specified).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>While nothing is returned, note that all raw data is saved and
+<cite>visualize.py</cite> can reproduce the figure that this function produces.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="i2c_cmd.html" class="btn btn-neutral float-left" title="i2c_cmd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visualize.html" class="btn btn-neutral float-right" title="visualize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

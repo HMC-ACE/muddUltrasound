@@ -1,0 +1,17 @@
+API
+===
+
+This API documentation provides the docstrings for the methods used to interact with the Phased Array through the ft2232h chip. All board to board communication ultimately is done with methods in the `i2c_cmd` module. Also documented here is `das_scan`, which is the module that contains all of the different imaging scripts, and `visualize`, which is the module that allows "replay" of the imaging done in `das_scan`.
+
+All of these modules are located in the ``scripts/`` directory, and can be run themselves (not just imported). Running ``python -i i2c_cmd.py`` will start python in interactive mode, and `i2c_cmd` will create a `PhasedArray` and `ChannelBoard` object for the user to interact with. Starting `das_scan.py` will run a spherical imaging script. `visualize.py` will allow the user to interactively select and view an imaging run to inspect and review.
+
+Other modules, all containing tests, are documented in the `tests` section.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   api/i2c_cmd
+   api/das_scan
+   api/visualize

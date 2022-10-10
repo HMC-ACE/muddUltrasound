@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transducer.html">Transducer Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_software.html">Running Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this heading"></a></h1>
+<p>This API documentation provides the docstrings for the methods used to interact with the Phased Array through the ft2232h chip. All board to board communication ultimately is done with methods in the <cite>i2c_cmd</cite> module. Also documented here is <cite>das_scan</cite>, which is the module that contains all of the different imaging scripts, and <cite>visualize</cite>, which is the module that allows “replay” of the imaging done in <cite>das_scan</cite>.</p>
+<p>All of these modules are located in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory, and can be run themselves (not just imported). Running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-i</span> <span class="pre">i2c_cmd.py</span></code> will start python in interactive mode, and <cite>i2c_cmd</cite> will create a <cite>PhasedArray</cite> and <cite>ChannelBoard</cite> object for the user to interact with. Starting <cite>das_scan.py</cite> will run a spherical imaging script. <cite>visualize.py</cite> will allow the user to interactively select and view an imaging run to inspect and review.</p>
+<p>Other modules, all containing tests, are documented in the <cite>tests</cite> section.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/i2c_cmd.html">i2c_cmd</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/i2c_cmd.html#phasedarray-class">PhasedArray class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/i2c_cmd.html#channelboard-class">ChannelBoard class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/das_scan.html">das_scan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.ac_couple"><code class="docutils literal notranslate"><span class="pre">ac_couple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.bandpass"><code class="docutils literal notranslate"><span class="pre">bandpass()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.find_env_peaks"><code class="docutils literal notranslate"><span class="pre">find_env_peaks()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.find_env_peaks_experimental"><code class="docutils literal notranslate"><span class="pre">find_env_peaks_experimental()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.first_peak"><code class="docutils literal notranslate"><span class="pre">first_peak()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_echo_DAS"><code class="docutils literal notranslate"><span class="pre">get_echo_DAS()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_peaks"><code class="docutils literal notranslate"><span class="pre">get_peaks()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.get_range"><code class="docutils literal notranslate"><span class="pre">get_range()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.halfwave_lowpass"><code class="docutils literal notranslate"><span class="pre">halfwave_lowpass()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.plot_cloud"><code class="docutils literal notranslate"><span class="pre">plot_cloud()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.scan_x_slice"><code class="docutils literal notranslate"><span class="pre">scan_x_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.scan_y_slice"><code class="docutils literal notranslate"><span class="pre">scan_y_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.spherical_scan"><code class="docutils literal notranslate"><span class="pre">spherical_scan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/das_scan.html#das_scan.spherical_scan_all_peaks"><code class="docutils literal notranslate"><span class="pre">spherical_scan_all_peaks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/visualize.html">visualize</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_dataset"><code class="docutils literal notranslate"><span class="pre">get_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_params"><code class="docutils literal notranslate"><span class="pre">get_params()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.get_sorted_trace_files"><code class="docutils literal notranslate"><span class="pre">get_sorted_trace_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.pick_file"><code class="docutils literal notranslate"><span class="pre">pick_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.view_traces"><code class="docutils literal notranslate"><span class="pre">view_traces()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/visualize.html#visualize.visualize_scan"><code class="docutils literal notranslate"><span class="pre">visualize_scan()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

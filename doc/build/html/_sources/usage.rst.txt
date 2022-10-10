@@ -1,0 +1,14 @@
+=====
+Usage
+=====
+
+1. Follow the instructions in :ref:`ref-array` to assemble the pzt array.
+2. Follow the instructions in :ref:`ref-channelboard` to hook up all power supplies and clock distribution, and ensure there are no shorts between any of the power rails. Flash the boards with the MCU firmware using the directions in :ref:`ref-flashingboards`
+3. Follow the instructions in :ref:`ref-motherboard` to hook up each channel board to the motherboard, and the motherboard to the Piezo array.
+4. Wire the ft2232h-56q board and 556 timer for i2c communication and sync pulse generation, respectively, as per the directions in :ref:`ref-software`. Note the 556 timer should be tuned to a 800 us delay, or ``PhasedArray.delay`` should be set to what it is tuned to in ``i2c_cmd.py``.
+5. Follow the instructions in :ref:`ref-software` to establish a connection with the boards.
+6. Follow the instructions in :ref:`ref-imaging` to run an imaging script. See the :ref:`ref-api` for more detailed software usage.
+
+.. warning:: The imaging speed is severely limited by the transfer times on the i2c bus. A single transmit/receive takes a few seconds, but a 3D scan takes on the order of an hour, since the beam is swept.
+
+-- Alec Vercruysse

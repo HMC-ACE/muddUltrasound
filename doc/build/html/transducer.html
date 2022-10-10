@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transducer Array &mdash; fish-n-chips-array  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Motherboard" href="motherboard.html" />
+    <link rel="prev" title="Ultrasonic Phased Array Research Platform Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> fish-n-chips-array
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transducer Array</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#outline">Outline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soldering-to-the-transducers">Soldering to the transducers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coating-process">Coating Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#assembly">Assembly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="motherboard.html">Motherboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="channelboard.html">Channel Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flashing_boards.html">Flashing Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_software.html">Running Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fish-n-chips-array</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Transducer Array</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/transducer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="transducer-array">
+<span id="ref-array"></span><h1>Transducer Array<a class="headerlink" href="#transducer-array" title="Permalink to this heading"></a></h1>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/piezo_array.jpg"><img alt="Image of pzt array." src="_images/piezo_array.jpg" style="width: 400px;" /></a>
+</figure>
+<section id="outline">
+<h2>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h2>
+<p>This section contains information on the piezoelectric transducer array, the process for coating each transducer with silicone, and guidelines for creating the array assembly. The transducers used are the <a class="reference external" href="https://www.americanpiezo.com/standard-products/piezo-tubes.html">American Piezo (APC) 42-1012</a> (may be available as the 42-1011, as well) cylindrical tube.</p>
+</section>
+<section id="soldering-to-the-transducers">
+<h2>Soldering to the transducers<a class="headerlink" href="#soldering-to-the-transducers" title="Permalink to this heading"></a></h2>
+<p>The piezoelectric cylinders are plated with a very delicate layer of metal, which enables us to solder connections to them. Take care to follow the instructions outlined by American piezo when soldering connections to them. American Piezo often includes piezo samples for soldering practice, or you can purchase a <a class="reference external" href="https://www.americanpiezo.com/standard-products/solder-kit.html">soldering kit</a>, which we recommend using. It’s critical to use low-temperature solder and flux, and to minimize the duration of direct heat with the transducers in order to preserve the metal plating on the transducer and prevent the ceramic from cracking.</p>
+<p>The outer ring of the cylinder is considered to be ground.</p>
+<p>The procedure that we used is outlined here:</p>
+<dl class="simple">
+<dt><em>Materials (per transducer)</em></dt><dd><ul class="simple">
+<li><p>APC 42-1012 piezo</p></li>
+<li><p>5ft of 22 AWG solid-core wire (twisted pairs, usually red and black or white and black)</p></li>
+<li><p>Flux paste</p></li>
+<li><p>Low-temperature rosin-core solder</p></li>
+<li><p>Soldering iron</p></li>
+<li><p>Flux remover spray or IPA</p></li>
+<li><p>Kapton or masking tape</p></li>
+</ul>
+</dd>
+<dt><em>Instructions</em></dt><dd><ol class="arabic simple">
+<li><p>Secure the piezo cylinder with tape to your work surface</p></li>
+<li><p>Strip about 5mm of insulation off both ends of the wires</p></li>
+<li><p>Apply a layer of solder to the exposed wires (aka tinning)</p></li>
+<li><p>Coat the exposed wire with flux paste. Rosin flux paste will also help the wire adhere to the surface of the piezo before soldering since it is slightly sticky.</p></li>
+<li><p>Mount or hold your wires to the transducer with the ground wire on the outer surface and the signal wire on the inner surface of the cylinder.</p></li>
+<li><p>Melt a bead of solder onto the soldering iron tip</p></li>
+<li><p>Carefully press the melted solder on the tip to the exposed wires on the piezo ring. When the solder has flowed and created a connection, remove the iron. The joint should be flat and shiny.</p></li>
+<li><p>Remove excess flux</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="coating-process">
+<h2>Coating Process<a class="headerlink" href="#coating-process" title="Permalink to this heading"></a></h2>
+<p>The ceramic transducers have an acoustic impedance that is quite different from that of water. We coat the transducers with a thin layer of silicone, which has an acoustic impedance much closer to that of water, to increase our power transfer into the water. The coating we used is the <a class="reference external" href="https://siliconesolutions.com/conformal-coatings/ss-6bclear.html">Silicone Solutions SS-6B</a>.</p>
+<p>This process should be completed after soldering wires to the piezos. Note that the process can be messy, so prepare a surface for the excess silicone to drip onto beforehand. We recommend hanging the transducers by their wires over an open area with tape and using paper towels to protect the surface below. We space the transducers a couple inches apart.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/pzt1.jpg"><img alt="Inserting the tub of coating around the pzt." src="_images/pzt1.jpg" style="width: 600px;" /></a>
+</figure>
+<p>Without moving the piezo, insert the tub of coating around each. Ensure that the entire piezo is coated, along with any exposed wire.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/pzt2.jpg"><img alt="Second image, inserting the tub of coating around the pzt." src="_images/pzt2.jpg" style="width: 600px;" /></a>
+</figure>
+<p>Slowly remove the tub from the cylinder and repeat on every piezo. Let the coating dry in a well-ventilated area for the manufacturer’s recommended cure time.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/pzt3.jpg"><img alt="Drying coated pzt." src="_images/pzt3.jpg" style="width: 600px;" /></a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/pzt4.jpg"><img alt="rack of drying coated pzts." src="_images/pzt4.jpg" style="width: 600px;" /></a>
+</figure>
+</section>
+<section id="assembly">
+<h2>Assembly<a class="headerlink" href="#assembly" title="Permalink to this heading"></a></h2>
+<p>Our array is encased in a polystyrene shell. This ensures consistent spacing. We use a 1/8” acrylic piece as a backplate for the array, with holes drilled for the transducer wires to pass through. We mount this assembly on a PVC pipe and use zip-ties for strain relief on the transducer wires.</p>
+<p>– Tejus Rao</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Ultrasonic Phased Array Research Platform Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="motherboard.html" class="btn btn-neutral float-right" title="Motherboard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 HMC-ACE Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
