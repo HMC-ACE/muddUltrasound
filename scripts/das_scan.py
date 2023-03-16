@@ -42,6 +42,7 @@ from scipy.signal import butter, filtfilt, find_peaks
 
 from datetime import datetime
 import os
+from pathlib import Path
 import logging
 import subprocess
 import glob
@@ -432,6 +433,8 @@ def get_peaks(array,
             ax_peak.clear()
             ax_range.clear()
             new_fig = False
+    else:
+        ax_peak = None
 
     echo = get_echo_DAS(array,
                         theta,
@@ -522,7 +525,12 @@ def spherical_scan(array,
     if log is not None:
         folder = datetime.now().strftime("img_%Y-%m-%d--%H-%M/")
         data_path = os.path.join(log, folder)
-        os.mkdir(data_path)  # `folder` should be unique
+        try:
+            Path(data_path).mkdir(parents=True, exist_ok=False)
+        except FileExistsError:
+            print("Data directory for this run already exists! Wait a minute" +
+                  " or delete the unused directory.")
+            raise
         log_name = os.path.join(data_path, "spherical_scan.log")
         handler = logging.FileHandler(filename=log_name)
         logger = logging.getLogger(__name__)
@@ -679,7 +687,12 @@ def spherical_scan_all_peaks(array,
     if log is not None:
         folder = datetime.now().strftime("img_%Y-%m-%d--%H-%M/")
         data_path = os.path.join(log, folder)
-        os.mkdir(data_path)  # `folder` should be unique
+        try:
+            Path(data_path).mkdir(parents=True, exist_ok=False)
+        except FileExistsError:
+            print("Data directory for this run already exists! Wait a minute" +
+                  " or delete the unused directory.")
+            raise
         log_name = os.path.join(data_path, "spherical_scan_all_peaks.log")
         handler = logging.FileHandler(filename=log_name)
         logger = logging.getLogger(__name__)
@@ -714,8 +727,7 @@ def spherical_scan_all_peaks(array,
     scatter = ax_main.scatter3D(0, 0, 0, c=0)
     cbar = fig.colorbar(scatter)
     cbar.ax.set_title("peak magnitude")
-    if visualize_debug:
-        fig_debug = plt.figure()
+    fig_debug = plt.figure() if visualize_debug else None
 
     for tidx, theta in enumerate(tr):
         for pidx, phi in enumerate(pr):
@@ -729,7 +741,7 @@ def spherical_scan_all_peaks(array,
                                          phi,
                                          r_range[1],
                                          envelope=halfwave_lowpass,
-                                         visualize=True,
+                                         visualize=visualize_debug,
                                          debug_fig=fig_debug,
                                          log=data_path,
                                          label=iteration)
